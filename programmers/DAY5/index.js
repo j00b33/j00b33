@@ -18,7 +18,7 @@ for (let i =0; i<myShopping.length; i++){
 if (myShopping[i].category ==="의류"){
 
 num = num+1
-cost = cost + 10000;
+cost += myShopping[i].cost
 
 if (num<3){
   level = "Bronze"}
@@ -29,7 +29,87 @@ else {
 }
 }
 console.log("의류를 구매한 횟수는 총 " + num + "회 금액은 " + cost + "이며 등급은 " + level + "입니다.")
-//result: '의류를 구매한 횟수는 총 5회 금액은 50000이며 등급은 Gold입니다.'
+//result: '의류를 구매한 횟수는 총 5회 금액은 57000이며 등급은 Gold입니다.'
+
+
+
+
+
+
+
+
+
+
+function grade(score) {
+  if (score>100 || score<0){
+    return "잘못된 점수입니다"
+  }
+  
+  let answer="";
+  if (score<=100 && score>=90){
+    answer = "A"
+  }
+  else if (score <=89 && score>=80){
+    answer="B"
+  }
+  else if (score <=79 && score>=70){
+    answer="C"
+  }
+  else if (score <=69 && score>=60){
+    answer= "D"
+  }
+  else if (score <=59){
+    answer = "F"
+  }
+  return answer;
+}
+grade(105)
+grade(-10)
+grade(97)
+grade(86)
+grade(75)
+grade(66)
+grade(52)
+//result: '잘못된 점수입니다'
+          '잘못된 점수입니다'
+          'A'
+          'B'
+          'C'
+          'D'
+          'F'
+
+
+
+
+
+
+
+
+
+//Shorten way
+function grade(score) {
+  if (score>100 || score<0){
+    return "잘못된 점수입니다"
+  }
+  
+  let answer="";
+  if (score>=90){
+    answer = "A"
+  }
+  else if (score>=80){
+    answer="B"
+  }
+  else if (score>=70){
+    answer="C"
+  }
+  else if (score>=60){
+    answer= "D"
+  }
+  else {
+    answer = "F"
+  }
+  return answer;
+}
 
 
 
@@ -41,7 +121,7 @@ console.log("의류를 구매한 횟수는 총 " + num + "회 금액은 " + cost
 
 
 
-//What I did:
+//---------------------------Not this-------------------------------------
 function random(){
     let token = String(Math.floor(Math.random()*10000)).padStart(4,"0") 
     console.log(token)
