@@ -16,7 +16,7 @@ let cost =0;
 let level = "";
 for (let i =0; i<myShopping.length; i++){
 if (myShopping[i].category ==="의류"){
-
+// 왜이러지
 num = num+1
 cost += myShopping[i].cost
 
