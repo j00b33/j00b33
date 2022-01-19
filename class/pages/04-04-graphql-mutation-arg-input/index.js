@@ -12,8 +12,6 @@ mutation createBoard($writer: String, $title: String, $contents: String){
     }
   }
 `
-
-
 export default function GraphqlMutation(){
     const [myWriter, setMyWriter]=useState("")
     const [myTitle, setMyTitle] = useState("")
@@ -29,7 +27,6 @@ export default function GraphqlMutation(){
         console.log(result.data.createBoard.message)
         setAaa(result.data.createBoard.message)
     }
-    //or const handleChangeWirter
     const onChangeMyWriter = (event) => {
         setMyWriter(event.target.value)
     } 
@@ -39,8 +36,6 @@ export default function GraphqlMutation(){
     const onChangeMyContents = (event) => {
         setMyContents(event.target.value)
     }
-
-
     return(
         <>
         작성자: <input type= "text" onChange={onChangeMyWriter} /><br/>

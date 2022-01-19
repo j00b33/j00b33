@@ -1,13 +1,9 @@
 import axios from 'axios'
 import {useState} from 'react'
-import {useMutation, gql} from '@apollo/client'
+import {gql, useMutation} from '@apollo/client'
 import {useRouter} from 'next/router'
-import {useQuery, gql} from '@apollo/client'
 
-
-
-
-const FETCH_PRODUCT = gql`
+const CREATE_PRODUCT = gql`
     mutation fetchProduct($seller: String!, $createProductInput: CreateProductInput!){
             fetchProduct(seller: $seller, createProductInput: $createProductInput){
             seller
@@ -18,27 +14,21 @@ const FETCH_PRODUCT = gql`
     }
 `
 
-export default function GraphqlMutationProduct(){
-
-    
+export default function DynamicRoutingProduct(){
     const router = useRouter()
+    const [createProduct] = useMutation(CREATE_PRODUCT)
 
     const [mySeller, setMySeller] = useState("")
     const [myName , setMyName] = useState("")
     const [myContents, setMyContents] = useState("")
     const [myPrice, setMyPrice] = useState("")
 
-    const [createProduct] = useMutation(CREATE_PRODUCT)
-
-
-
-
     const OnclickSubmit = async() => {
         // try {
         const result = await createProduct({  
         variables: {
             seller: mySeller,
-            createProductInput: {
+            fetchProductInput: {
                 name: myName,
                 detail: myContents,
                 price: Number(myPrice)
@@ -47,6 +37,8 @@ export default function GraphqlMutationProduct(){
         }) 
         console.log(result.data.createProduct.id) //84c4ea23-037c-4049-9315-6525a820437f
         router.push(`/05-08-dynamic-routed-product/ ${result.data?.createProduct._id}`)
+    }
+
                             //해당하는 위치                     //해당하는 변수/상수
     
     // }catch(error){
@@ -78,10 +70,10 @@ export default function GraphqlMutationProduct(){
         상품 이름: <input type= "text" onChange={onChangeMyName}/><br/>
         상품내용: <input type= "text" onChange={onChangeMyContents}/><br/>
         가격: <input type= "text" onChange={onChangeMyPrice}/><br/>
-        {/* <input type="number"/> 숫자 올라가는 text */}
+        <input type="number"/> 
         <button onClick={OnclickSubmit}>상품 등록하기</button>
         
         </>
         )
-    }
+    
 }

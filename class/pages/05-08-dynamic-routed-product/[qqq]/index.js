@@ -1,16 +1,29 @@
 import {useRouter} from 'next/router'
+import {useQuery} from '@apollo/client'
 
-const FETCH_PRODUCT
+const FETCH_PRODUCT = gql`
+query fetchProduct($productId: ID){
+    fetchProduct(productId: $productId) {
+        seller
+        name
+        detail
+        price
+    }
+}
+`
 
 export default function DynamicRoutedPage(){
     const router = useRouter()
     const {data} = useQuery(FETCH_PRODUCT, {
-
+        variable: {productId: router.query.qqq}
     })
 
-    console.log(router.query.qqq)
+    // console.log(router.query.qqq)
 
     return (
-        <div>{router.query.qqq}번 게시글 페이지 이동 완료</div>
+        <div>
+        <div>상품명: {data?.fetchProduct?.name}</div>
+        <div>상품 가격: {data?.fetchProduct?.price}</div>
+        </div>
     )
 }
